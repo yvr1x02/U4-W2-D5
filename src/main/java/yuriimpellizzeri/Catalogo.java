@@ -39,6 +39,15 @@ public class Catalogo {
                 .collect(Collectors.toList());
     }
 
+    //ricerca per autore
+
+    public List<Libro> cercaPerAutore(String autore) {
+        return elementi.stream()
+                .filter(elemento -> elemento instanceof Libro && ((Libro) elemento).getAutore().equalsIgnoreCase(autore))
+                .map(elemento -> (Libro) elemento)
+                .collect(Collectors.toList());
+    }
+
 
     public List<CatalogoElem> getElementi() {
         return new ArrayList<>(elementi);
