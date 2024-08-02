@@ -1,6 +1,6 @@
 package yuriimpellizzeri;
 
-public class Libro extends Catalogo {
+public class Libro extends CatalogoElem {
     private String autore;
     private String genere;
 
@@ -14,16 +14,8 @@ public class Libro extends Catalogo {
         return autore;
     }
 
-    public void setAutore(String autore) {
-        this.autore = autore;
-    }
-
     public String getGenere() {
         return genere;
-    }
-
-    public void setGenere(String genere) {
-        this.genere = genere;
     }
 
     @Override
@@ -31,6 +23,6 @@ public class Libro extends Catalogo {
         return "Libro{" +
                 "autore='" + autore + '\'' +
                 ", genere='" + genere + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }
