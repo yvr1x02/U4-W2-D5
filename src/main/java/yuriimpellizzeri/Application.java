@@ -1,9 +1,14 @@
 package yuriimpellizzeri;
 
+import java.util.Optional;
+import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
 
+
+        Scanner scanner = new Scanner(System.in);
         Catalogo catalogo = new Catalogo();
 
         // Aggiunta di libri e riviste
@@ -19,8 +24,37 @@ public class Application {
         catalogo.aggiungiElemento(rivista2);
 
 
-        System.out.println("Catalogo: ");
-        catalogo.getElementi().forEach(System.out::println);
+        while (true) {
+            System.out.println("----------- Catalogo ------------");
+            catalogo.getElementi().forEach(System.out::println);
+            System.out.println("---------------------------------");
+
+            System.out.println("1 --> Rimuovi un elemento per codice ISBN");
+            System.out.println("2 --> Cerca un elemento per codice ISBN");
+
+            int scelta = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (scelta) {
+
+                case 1:
+                    System.out.println("Inserisci l'ISBN da rimuovere per favore.");
+                    String isbnDaRimuovere = scanner.nextLine();
+                    catalogo.rimuoviElemento(isbnDaRimuovere);
+                    System.out.println("elemento eliminato!");
+                    System.out.println(catalogo.getElementi());
+
+                case 2:
+                    System.out.println("Inserisci l'ISBN da cercare per favore.");
+                    String isbnDaCercare = scanner.nextLine();
+                    Optional<CatalogoElem> elemento = catalogo.cercaElemento(isbnDaCercare);
+                    if (elemento.isPresent()) {
+                        System.out.println(elemento.get());
+                    } else {
+                        System.out.println("elemento non trovato");
+                    }
+            }
+        }
 
 
     }
