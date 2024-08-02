@@ -1,5 +1,6 @@
 package yuriimpellizzeri;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -29,8 +30,11 @@ public class Application {
             catalogo.getElementi().forEach(System.out::println);
             System.out.println("---------------------------------");
 
+
+            System.out.println("*************** Scegli un opzione per favore (1-5) ***************");
             System.out.println("1 --> Rimuovi un elemento per codice ISBN");
             System.out.println("2 --> Cerca un elemento per codice ISBN");
+            System.out.println("3 --> Cerca un elemento per anno di pubblicazione");
 
             int scelta = scanner.nextInt();
             scanner.nextLine();
@@ -42,7 +46,7 @@ public class Application {
                     String isbnDaRimuovere = scanner.nextLine();
                     catalogo.rimuoviElemento(isbnDaRimuovere);
                     System.out.println("elemento eliminato!");
-                    System.out.println(catalogo.getElementi());
+                   
 
                 case 2:
                     System.out.println("Inserisci l'ISBN da cercare per favore.");
@@ -52,6 +56,15 @@ public class Application {
                         System.out.println(elemento.get());
                     } else {
                         System.out.println("elemento non trovato");
+                    }
+                case 3:
+                    System.out.println("Inserisci l'anno di pubblicazione da cercare per favore.");
+                    int annoDaCercare = scanner.nextInt();
+                    List<CatalogoElem> elementiPerAnno = catalogo.cercaPerAnno(annoDaCercare);
+                    if (elementiPerAnno.isEmpty()) {
+                        System.out.println("nessun elemento trovato per l'anno " + annoDaCercare);
+                    } else {
+                        elementiPerAnno.forEach(System.out::println);
                     }
             }
         }

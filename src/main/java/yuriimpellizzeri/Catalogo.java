@@ -3,6 +3,7 @@ package yuriimpellizzeri;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Catalogo {
     private List<CatalogoElem> elementi;
@@ -28,6 +29,14 @@ public class Catalogo {
         return elementi.stream()
                 .filter(elemento -> elemento.getIsbn().equals(isbn))
                 .findFirst();
+    }
+
+    //ricerca per anno di pubblicazione
+
+    public List<CatalogoElem> cercaPerAnno(int anno) {
+        return elementi.stream()
+                .filter(elemento -> elemento.getAnnoPubblicazione() == anno)
+                .collect(Collectors.toList());
     }
 
 
